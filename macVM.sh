@@ -63,13 +63,13 @@ echo "Opening tunnel..."
 mkdir -p /tmp/gui
 
 # Download ngrok
-curl -o /tmp/gui/ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
+curl -o /tmp/gui/ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-darwin-amd64.zip
 
 # Extract ngrok
 tar -xzf /tmp/gui/ngrok.tgz -C /tmp/gui
 
 # Update ngrok (optional step, usually not required immediately after downloading)
-# /tmp/gui/ngrok update
+/tmp/gui/ngrok update
 
 # Set your ngrok authtoken
 /tmp/gui/ngrok authtoken 1hTflrwncelU7Uexv9bmSYiHKOl_54pPSvNe5XxEydJm1uHD4 --config /tmp/gui/ngrok.yml
