@@ -59,8 +59,21 @@ echo "Enabling remote access..."
 sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate -configure -access -off -restart -agent -privs -all -allowAccessFor -allUsers
 # Reverse tunnel to screen share port
 echo "Opening tunnel..."
-mkdir /tmp/gui
-curl -o /tmp/gui/z.$$ https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz && (cd /tmp/gui && unzip /tmp/gui/z.$$) && rm /tmp/gui/z.$$
-/tmp/gui/ngrok update
+# Ensure /tmp/gui directory exists
+mkdir -p /tmp/gui
+
+# Download ngrok
+curl -o /tmp/gui/ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
+
+# Extract ngrok
+tar -xzf /tmp/gui/ngrok.tgz -C /tmp/gui
+
+# Update ngrok (optional step, usually not required immediately after downloading)
+# /tmp/gui/ngrok update
+
+# Set your ngrok authtoken
 /tmp/gui/ngrok authtoken 1hTflrwncelU7Uexv9bmSYiHKOl_54pPSvNe5XxEydJm1uHD4 --config /tmp/gui/ngrok.yml
-/tmp/gui/ngrok tcp 5900 -log=stdout --config /tmp/gui/ngrok.yml
+
+# Start a TCP tunnel to port 5900 (commonly used for VNC)
+/tmp/gui/ngrok tcp 5900 --log=stdout --config /tmp/gui/ngrok.yml
+
